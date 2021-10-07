@@ -1,8 +1,9 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { CouplesReducer } from './bookedByCouples/reducer';
 
 const allReducers = combineReducers({
-    // reducer,
+    CouplesReducer,
 });
 
 const store = createStore(

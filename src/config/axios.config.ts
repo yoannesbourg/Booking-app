@@ -2,12 +2,12 @@ import axios from 'axios';
 
 export const loadProxyUrl = (): string | undefined => {
     if (window.location.host.includes('localhost')) {
-        return 'http://localhost:5000';
+        return 'http://localhost:3000';
     }
 };
 
 const AxiosConfig = axios.create({
-    baseURL: `${loadProxyUrl()}/api/`,
+    baseURL: `${loadProxyUrl()}/`,
     headers: {
         'Content-Type': 'application/json',
     },
