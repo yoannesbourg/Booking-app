@@ -1,10 +1,5 @@
 import * as couplesActionTypes from './actionsType';
-interface ReduxRootState {
-    data: [];
-    loading: boolean;
-    status?: number;
-}
-
+import { ReduxRootState } from '../../interfaces/ReduxRootState';
 export default interface ReduxActionInterface {
     type: string;
     payload: {

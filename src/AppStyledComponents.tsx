@@ -11,3 +11,7 @@ export const Container = styled.div`
 export const Paragraph = styled.p`
     margin-top: 16px;
 `;
+
+export const CardList = styled.div`
+    margin-top: 16px;
+`;
