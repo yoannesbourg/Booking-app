@@ -1,9 +1,10 @@
 import * as couplesActionTypes from './actionsType';
 import { ReduxRootState } from '../../interfaces/ReduxRootState';
+import { Couple } from '../StoreInterface';
 export default interface ReduxActionInterface {
     type: string;
     payload: {
-        data: [];
+        data: Couple[];
         status: number | undefined;
     };
 }
@@ -39,6 +40,39 @@ export const CouplesReducer = (
             if (action.payload) {
                 return {
                     data: action.payload.data,
+                    loading: false,
+                    status: action.payload.status,
+                };
+            }
+
+            return state;
+
+        case couplesActionTypes.UPDATE_COUPLE_LOADING:
+            return {
+                ...state,
+                loading: true,
+            };
+
+        case couplesActionTypes.UPDATE_COUPLE_ERROR:
+            if (action.payload) {
+                return {
+                    ...state,
+                    loading: false,
+                    status: action.payload.status,
+                };
+            }
+
+            return state;
+
+        case couplesActionTypes.UPDATE_COUPLE_SUCCESS:
+            if (action.payload) {
+                const updatedCouple = action.payload.data[0];
+                const coupleIndex = state.data.findIndex((element) => element.id === updatedCouple.id);
+                const stateListModified = state.data;
+                stateListModified.splice(coupleIndex, 1, updatedCouple);
+                return {
+                    ...state,
+                    data: stateListModified,
                     loading: false,
                     status: action.payload.status,
                 };

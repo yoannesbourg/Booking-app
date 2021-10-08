@@ -1,4 +1,7 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import { updateCouples } from '../../../service/bookedByCouples/actions';
 
 import { Couple as CoupleInteface } from '../../../service/StoreInterface';
 
@@ -6,6 +9,8 @@ import PrimaryButton from '../../small/PrimaryButton/PrimaryButton';
 import { CardWrapper, LeftColumn, RightColumn, Photo, Infos, Couple, CTAs, DeleteButton } from './Styled.components';
 
 const Card = (props: CoupleInteface): JSX.Element => {
+    const dispatch = useDispatch();
+
     const formatCoupleName = (partnersArr: string[]) => {
         const coupleNamesSplited = partnersArr.map((partner) => partner.split(' '));
         const firstNames = coupleNamesSplited.map((arr: string[]) => (arr.length > 2 ? `${arr[0]} ${arr[1]}` : arr[0]));
@@ -13,7 +18,9 @@ const Card = (props: CoupleInteface): JSX.Element => {
     };
 
     const handleConfirmBooking = () => {
-        console.log('click');
+        const updatedCouple = { ...props };
+        updatedCouple.collaborating = true;
+        dispatch(updateCouples(updatedCouple));
     };
 
     return (
@@ -30,10 +37,14 @@ const Card = (props: CoupleInteface): JSX.Element => {
                 </Couple>
             </LeftColumn>
             <RightColumn>
-                <CTAs>
-                    <PrimaryButton text="Confirm booking" action={handleConfirmBooking} />
-                    <DeleteButton>Not my booking</DeleteButton>
-                </CTAs>
+                {!props.collaborating ? (
+                    <CTAs>
+                        <PrimaryButton text="Confirm booking" action={handleConfirmBooking} />
+                        <DeleteButton>Not my booking</DeleteButton>
+                    </CTAs>
+                ) : (
+                    <p>Confirmed</p>
+                )}
             </RightColumn>
         </CardWrapper>
     );

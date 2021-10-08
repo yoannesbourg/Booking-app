@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 import { fetchAllCouples } from './service/bookedByCouples/actions';
 import Card from './components/medium/card/Card';
@@ -7,13 +7,11 @@ import { Container, Paragraph, CardList } from './AppStyledComponents';
 
 import { StoreState } from './service/StoreInterface';
 
-const App = (): JSX.Element => {
+const App = (props: StoreState): JSX.Element => {
     const dispatch = useDispatch();
-
-    const couplesList = useSelector((state: StoreState) => state.CouplesReducer.data);
+    const couplesList = props.CouplesReducer.data;
     useEffect(() => {
         dispatch(fetchAllCouples());
-        // console.log(couplesList);
     }, []);
     return (
         <Container>
@@ -31,4 +29,8 @@ const App = (): JSX.Element => {
         </Container>
     );
 };
-export default App;
+const mapStateToProps = (state: StoreState) => ({
+    CouplesReducer: state.CouplesReducer,
+});
+
+export default connect(mapStateToProps)(App);
