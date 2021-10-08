@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { updateCouples } from '../../../service/bookedByCouples/actions';
+import { updateCouple, deleteCouple } from '../../../service/bookedByCouples/actions';
 
 import { Couple as CoupleInteface } from '../../../service/StoreInterface';
 
@@ -20,7 +20,11 @@ const Card = (props: CoupleInteface): JSX.Element => {
     const handleConfirmBooking = () => {
         const updatedCouple = { ...props };
         updatedCouple.collaborating = true;
-        dispatch(updateCouples(updatedCouple));
+        dispatch(updateCouple(updatedCouple));
+    };
+
+    const handleDeleteCouple = () => {
+        dispatch(deleteCouple(props.id));
     };
 
     return (
@@ -40,7 +44,7 @@ const Card = (props: CoupleInteface): JSX.Element => {
                 {!props.collaborating ? (
                     <CTAs>
                         <PrimaryButton text="Confirm booking" action={handleConfirmBooking} />
-                        <DeleteButton>Not my booking</DeleteButton>
+                        <DeleteButton onClick={handleDeleteCouple}>Not my booking</DeleteButton>
                     </CTAs>
                 ) : (
                     <p>Confirmed</p>

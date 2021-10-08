@@ -32,7 +32,7 @@ export const fetchAllCouples = (): ThunkAction<void, null, unknown, Action<strin
     }
 };
 
-export const updateCouples =
+export const updateCouple =
     (couple: CoupleInteface): ThunkAction<void, null, unknown, Action<string>> =>
     async (dispatch) => {
         dispatch({
@@ -61,5 +61,33 @@ export const updateCouples =
             }
         } catch (error) {
             return dispatch({ type: couplesActionTypes.UPDATE_COUPLE_ERROR });
+        }
+    };
+
+export const deleteCouple =
+    (id: string): ThunkAction<void, null, unknown, Action<string>> =>
+    async (dispatch) => {
+        dispatch({
+            type: couplesActionTypes.DELETE_COUPLE_LOADING,
+        });
+        try {
+            const response = await AxiosConfig.delete(`/bookedByCouples/${id}`);
+            if (response.status !== 200) {
+                return dispatch({
+                    type: couplesActionTypes.DELETE_COUPLE_ERROR,
+                    payload: {
+                        status: response.status,
+                    },
+                });
+            }
+            return dispatch({
+                type: couplesActionTypes.DELETE_COUPLE_SUCCESS,
+                payload: {
+                    status: response.status,
+                    id,
+                },
+            });
+        } catch (error) {
+            return dispatch({ type: couplesActionTypes.DELETE_COUPLE_ERROR });
         }
     };
