@@ -1,14 +1,19 @@
 import React from 'react';
 
-import { Couple as CoupleInteface } from '../../service/StoreInterface';
+import { Couple as CoupleInteface } from '../../../service/StoreInterface';
 
-import { CardWrapper, LeftColumn, RightColumn, Photo, Infos, Couple, CTAs } from './Styled.components';
+import PrimaryButton from '../../small/PrimaryButton/PrimaryButton';
+import { CardWrapper, LeftColumn, RightColumn, Photo, Infos, Couple, CTAs, DeleteButton } from './Styled.components';
 
 const Card = (props: CoupleInteface): JSX.Element => {
     const formatCoupleName = (partnersArr: string[]) => {
         const coupleNamesSplited = partnersArr.map((partner) => partner.split(' '));
         const firstNames = coupleNamesSplited.map((arr: string[]) => (arr.length > 2 ? `${arr[0]} ${arr[1]}` : arr[0]));
         return firstNames.join(' & ');
+    };
+
+    const handleConfirmBooking = () => {
+        console.log('click');
     };
 
     return (
@@ -25,7 +30,10 @@ const Card = (props: CoupleInteface): JSX.Element => {
                 </Couple>
             </LeftColumn>
             <RightColumn>
-                <CTAs>CTAs</CTAs>
+                <CTAs>
+                    <PrimaryButton text="Confirm booking" action={handleConfirmBooking} />
+                    <DeleteButton>Not my booking</DeleteButton>
+                </CTAs>
             </RightColumn>
         </CardWrapper>
     );

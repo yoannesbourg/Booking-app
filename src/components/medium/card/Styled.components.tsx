@@ -49,4 +49,15 @@ export const Couple = styled(CardElement)`
     text-align: left;
 `;
 
-export const CTAs = styled.div``;
+export const CTAs = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const DeleteButton = styled.button`
+    color: #4d5b6a;
+    background: transparent;
+    padding: 8px 18px;
+    cursor: pointer;
+    margin-top: 8px;
+`;

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchAllCouples } from './service/bookedByCouples/actions';
-import Card from './components/card/Card';
+import Card from './components/medium/card/Card';
 import { Container, Paragraph, CardList } from './AppStyledComponents';
 
 import { StoreState } from './service/StoreInterface';
