@@ -17,8 +17,6 @@ export const LeftColumn = styled.div`
     position: relative;
 `;
 
-export const RightColumn = styled.div``;
-
 export const CardElement = styled.div`
     margin-right: 16px;
     display: flex;
@@ -49,7 +47,7 @@ export const Couple = styled(CardElement)`
     text-align: left;
 `;
 
-export const CTAs = styled.div`
+export const RightColumn = styled.div`
     display: flex;
     flex-direction: column;
 `;
@@ -60,4 +58,8 @@ export const DeleteButton = styled.button`
     padding: 8px 18px;
     cursor: pointer;
     margin-top: 8px;
+`;
+
+export const Details = styled.div`
+    padding: 8px 18px;
 `;
