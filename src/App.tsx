@@ -22,9 +22,11 @@ const App = (props: StoreState): JSX.Element => {
             </Paragraph>
             <CardList>
                 {couplesList &&
-                    couplesList.map((couple) => {
-                        return <Card key={couple.id} {...couple} />;
-                    })}
+                    couplesList
+                        .sort((value) => (value.collaborating ? -1 : 1))
+                        .map((couple) => {
+                            return <Card key={couple.id} {...couple} />;
+                        })}
             </CardList>
         </Container>
     );
