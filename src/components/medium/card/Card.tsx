@@ -7,11 +7,21 @@ import { Couple as CoupleInteface } from '../../../service/StoreInterface';
 
 import PrimaryButton from '../../small/PrimaryButton/PrimaryButton';
 import SecondaryButton from '../../small/SecondaryButton/SecondaryButton';
-import { CardWrapper, LeftColumn, RightColumn, Photo, Infos, Couple, DeleteButton, Details } from './Styled.components';
+import {
+    CardWrapper,
+    LeftColumn,
+    RightColumn,
+    Photo,
+    Infos,
+    Couple,
+    DeleteButton,
+    Details,
+    ProgressBackground,
+    ProgressBar,
+} from './Styled.components';
 
 const Card = (props: CoupleInteface): JSX.Element => {
     const dispatch = useDispatch();
-
     const formatCoupleName = (partnersArr: string[]) => {
         const coupleNamesSplited = partnersArr.map((partner) => partner.split(' '));
         const firstNames = coupleNamesSplited.map((arr: string[]) => (arr.length > 2 ? `${arr[0]} ${arr[1]}` : arr[0]));
@@ -35,7 +45,24 @@ const Card = (props: CoupleInteface): JSX.Element => {
     };
 
     const getPercentage = (value: number, totalValue: number) => {
-        return (value / totalValue) * 100;
+        if (!value || !totalValue) {
+            return 0;
+        }
+        return Math.round((value / totalValue) * 100);
+    };
+
+    const formatDate = (date: number) => {
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const constructedDate = new Date(date);
+        return `${constructedDate.getDate()} ${
+            monthNames[constructedDate.getMonth()]
+        } ${constructedDate.getFullYear()}`;
+    };
+
+    const getDifferenceBetwwenDates = (date: number) => {
+        const oneDay = 1000 * 60 * 60 * 24;
+        const now = new Date().getTime();
+        return Math.round((now - date) / oneDay);
     };
 
     return (
@@ -43,7 +70,7 @@ const Card = (props: CoupleInteface): JSX.Element => {
             <LeftColumn>
                 <Photo image={props.profilePhoto}></Photo>
                 <Infos>
-                    <h4>{props.weddingDate}</h4>
+                    <h4>{props.weddingDate ? formatDate(props.weddingDate) : 'No date yet'}</h4>
                     <p>{props.guestsInitialTarget ? props.guestsInitialTarget : 0} guests</p>
                 </Infos>
                 <Couple>
@@ -60,11 +87,11 @@ const Card = (props: CoupleInteface): JSX.Element => {
                 <>
                     <SecondaryButton text="Connected" hoverText="Disconnect" action={handleDisconnect} />
                     <Details>
-                        <p>Added {props.createdAt} days ago</p>
-                        <p>Checklist Completion </p>
-                        {props.tasksDone && props.tasksTotal
-                            ? ' ' + getPercentage(props.tasksDone, props.tasksTotal)
-                            : '0'}
+                        <p>Added {getDifferenceBetwwenDates(props.createdAt)} days ago</p>
+                        <p>Checklist Completion {getPercentage(props.tasksDone, props.tasksTotal)}%</p>
+                        <ProgressBackground>
+                            <ProgressBar percent={getPercentage(props.tasksDone, props.tasksTotal)} />
+                        </ProgressBackground>
                     </Details>
                 </>
             )}

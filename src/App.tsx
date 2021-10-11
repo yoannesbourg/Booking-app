@@ -23,7 +23,7 @@ const App = (props: StoreState): JSX.Element => {
             <CardList>
                 {couplesList &&
                     couplesList
-                        .sort((value) => (value.collaborating ? -1 : 1))
+                        .sort((value) => (value.collaborating ? 1 : -1))
                         .map((couple) => {
                             return <Card key={couple.id} {...couple} />;
                         })}

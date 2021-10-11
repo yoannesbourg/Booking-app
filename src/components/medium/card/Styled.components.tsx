@@ -63,3 +63,15 @@ export const DeleteButton = styled.button`
 export const Details = styled.div`
     padding: 8px 18px;
 `;
+
+export const ProgressBackground = styled.div`
+    width: 200px;
+    height 4px;
+    background-color: #e9eced;
+`;
+
+export const ProgressBar = styled.div`
+    height 4px;
+    background-color: #43c1b0;
+    width: ${(props: { percent?: number }) => (props.percent ? props.percent : '1')}%;
+`;
