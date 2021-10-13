@@ -7,12 +7,12 @@ import Card from './components/medium/card/Card';
 import Searchbar from './components/small/Searchbar/Searchbar';
 import { Container, Paragraph, CardList, PrevButton, NextButton, ButtonsWrapper } from './AppStyledComponents';
 
-import { StoreState } from './service/StoreInterface';
+import { StoreState, Couple } from './service/StoreInterface';
 import { filters } from './interfaces/Filters';
 
 const App = (props: StoreState): JSX.Element => {
     const dispatch = useDispatch();
-    const couplesList = props.CouplesReducer.data;
+    const couplesList: Couple[] = props.CouplesReducer.data;
 
     const [filters, setLfilters] = useState<filters>({
         search: '',

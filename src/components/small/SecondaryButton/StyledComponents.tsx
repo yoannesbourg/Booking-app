@@ -13,6 +13,5 @@ export const SecondaryButtonStyling = styled.button`
     &:hover {
         border: 1px solid #da4f4f;
         color: #da4f4f;
-        content: 'hello';
     }
 `;
