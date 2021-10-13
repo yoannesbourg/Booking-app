@@ -7,6 +7,6 @@ export const Input = styled.input`
     border-radius: 4px;
     &:focus {
         outline: none;
-        box-shadow: 0px 0px 2px red;
+        box-shadow: 0px 0px 2px #2222224d;
     }
 `;
