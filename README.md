@@ -10,7 +10,7 @@ If you have a prettier issue, just run npm run lint-fix
 ### Details:
 
 - For this project I've used React, Typescript, Axios, Redux for the state management, React Hooks, CSS-in-JS approach styling method (Styled Components) and Eslint + Prettier.
-- Data management with json-server (https://github.com/typicode/json-server) to fetch and save data from db.json. It runs in port 3000 by default while he react app is programmed to run in port 3001.
+- Data management with [json-server](https://github.com/typicode/json-server) to fetch and save data from db.json. It runs in port 3000 by default while he react app is programmed to run in port 3001.
 - List is sorted with unconfirmed bookings at the top and confirmed below.
 - When `collaborating: true` then booking is confirmed
 - Clicking on "Confirm booking" changes `collaborating` to `true`.
