@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
-import { Input } from './StyledComponents';
+import { Input, Wrapper } from './StyledComponents';
 
 import useDebounce from '../../../hooks/useDebounce';
 
@@ -14,9 +14,9 @@ const Searchbar = ({ handleSearch }: { handleSearch: (value: string) => void }):
         handleSearch(value);
     }, [debouncedValue]);
     return (
-        <div>
+        <Wrapper>
             <Input type="text" value={value} onChange={handleChange} placeholder="Search" />
-        </div>
+        </Wrapper>
     );
 };
 

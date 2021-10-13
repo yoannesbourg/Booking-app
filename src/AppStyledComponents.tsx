@@ -23,6 +23,7 @@ export const ButtonsWrapper = styled.div`
 
 export const Button = styled.button`
     background: white;
+    color: #909090;
     border: 1px solid #eceff1;
     box-shadow: 0px 0px 2px #2222224d;
     width: 40px;

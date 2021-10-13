@@ -10,3 +10,8 @@ export const Input = styled.input`
         box-shadow: 0px 0px 2px #2222224d;
     }
 `;
+
+export const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+`;
